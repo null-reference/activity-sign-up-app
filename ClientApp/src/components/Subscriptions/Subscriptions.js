@@ -1,32 +1,69 @@
 import React, { Component } from 'react';
-import './Subscriptions.css';
+import { Table } from 'react-bootstrap';
 
+/**
+ * Simple component that displays activity subscriptions, nothing more
+ */
 export class Subscriptions extends Component {
   displayName = Subscriptions.name
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     firstName: "",
-  //     lastName: "",
-  //     email: "",
-  //     activity: "",
-  //     comments: "",
-  //   };
-  //   this.formValueChanged = this.formValueChanged.bind(this);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      subscriptions: [],
+    };
+  }
 
-  // formValueChanged(event) {
-  //   this.setState({
-  //     [event.target.name]: event.target.value,
-  //   });
-  // }
+  componentWillMount() {
+    fetch(new Request('/api/ActivitySignUp/Subscriptions')).then(res => {
+      res.json().then(subs => {
+        this.setState({ 
+          loading: false,
+          subscriptions: subs
+        });
+      });
+    });
+  }
 
   render() {
+    const {
+      loading,
+      subscriptions,
+    } = this.state;
+
     return (
       <div>
-        <h1>Subscriptions</h1>
+        <h1>See Who's Signed Up</h1>
 
+        {loading && <div>Loading...</div>}
+
+        {!loading &&
+          <Table striped bordered condensed hover>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Activity</th>
+                <th>Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+              {subscriptions.map(x => 
+                <tr key={x.subscriptionID}>
+                  <td>{x.subscriptionID}</td>
+                  <td>{x.firstName}</td>
+                  <td>{x.lastName}</td>
+                  <td>{x.email}</td>
+                  <td>{x.activity}</td>
+                  <td>{x.comments}</td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        }
       </div>
     );
   }

@@ -1,8 +1,10 @@
+using activity_sign_up_app.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,6 +29,10 @@ namespace activity_sign_up_app
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            // Gotta get that sweet, sweeeet db access
+            services.AddDbContext<SubscriptionContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("AcmeWebActivityDatabase")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

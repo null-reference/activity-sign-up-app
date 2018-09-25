@@ -1,3 +1,30 @@
 ﻿label {
     width: 100px;
 }
+
+input, textarea {
+    width: 50%;
+}
+
+.label-align-top {
+    vertical-align: top;
+    margin-top: 2px;
+}
+
+.submit-button {
+    margin: 15px 0 0 100px;
+}
+
+.required-field-indicator::after {
+    color: red;
+    content: "*";
+}
+
+.required-field-footnote {
+    color: red;
+    margin: 15px 0 0 100px;
+}
+
+.success-alert {
+    width: 90%;
+}
