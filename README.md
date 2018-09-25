@@ -32,7 +32,7 @@ Clone the repository: `git clone https://github.com/null-reference/activity-sign
 
 Open the created directory with VSCode.
 
-You should be prompted with a message similar to "There are unresolved dependencies'. Please execute the restore command to continue.", choose "Restore". This will install all the required project dependences.
+You should be prompted with a message similar to "There are unresolved dependencies'. Please execute the restore command to continue.", choose "Restore". This will install all the required project dependencies.
 
 Once complete, run the application with a press of the `F5` key.
 
