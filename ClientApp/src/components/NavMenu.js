@@ -12,13 +12,23 @@ export class NavMenu extends Component {
       <Navbar inverse fixedTop fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to={'/'}>activity_sign_up_app</Link>
+            <Link to={'/'}>Activity Sign Up</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
             <LinkContainer to={'/'} exact>
+              <NavItem>
+                <Glyphicon glyph="user" /> Sign Up
+              </NavItem>
+            </LinkContainer>
+            <LinkContainer to={'/subscriptions'}>
+              <NavItem>
+                <Glyphicon glyph='th-list' /> Subscriptions
+              </NavItem>
+            </LinkContainer>
+            {/* <LinkContainer to={'/'} exact>
               <NavItem>
                 <Glyphicon glyph='home' /> Home
               </NavItem>
@@ -32,7 +42,7 @@ export class NavMenu extends Component {
               <NavItem>
                 <Glyphicon glyph='th-list' /> Fetch data
               </NavItem>
-            </LinkContainer>
+            </LinkContainer> */}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
