@@ -16,11 +16,12 @@ export class Subscriptions extends Component {
   }
 
   componentWillMount() {
-    fetch(new Request('/api/ActivitySignUp/Subscriptions')).then(res => {
+    fetch("/api/subscriptions").then(res => {
       res.json().then(subs => {
         this.setState({ 
           loading: false,
-          subscriptions: subs
+          // pre-sort by id
+          subscriptions: subs.sort((a, b) => a.subscriptionID - b.subscriptionID),
         });
       });
     });

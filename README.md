@@ -6,7 +6,7 @@ For those who know what's up... WELCOME!
 
 # Getting Started
 
-**IMPORTANT: The project depends upon a localdb instance (ie. server accessible @ `(localdb)\mssqllocaldb)`**
+**IMPORTANT: The project depends upon a localdb instance (ie. server accessible @ `(localdb)\mssqllocaldb)`)**
 
 Firstly, let's get the necessary DB setup out of the way. Run the following against your `localdb` instance.
 

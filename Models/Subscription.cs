@@ -13,14 +13,4 @@ namespace activity_sign_up_app.Models
     public string Activity { get; set; }
     public string Comments { get; set; }
   }
-
-  public class SubscriptionContext : DbContext
-  {
-    public SubscriptionContext(DbContextOptions<SubscriptionContext> options)
-      : base(options)
-    {
-    }
-
-    public DbSet<Subscription> Subscription { get; set; }
-  }
 }

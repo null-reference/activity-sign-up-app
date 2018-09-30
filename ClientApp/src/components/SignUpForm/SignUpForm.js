@@ -88,7 +88,7 @@ export class SignUpForm extends Component {
     }
     //////////////////////////////////////////////////
 
-    fetch("/api/ActivitySignUp/Subscriptions", {
+    fetch("/api/subscriptions", {
       method: "POST",
       headers: {
         Accept: "application/json",

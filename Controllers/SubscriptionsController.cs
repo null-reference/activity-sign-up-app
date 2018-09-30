@@ -2,23 +2,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using activity_sign_up_app.Data;
 using activity_sign_up_app.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace activity_sign_up_app.Controllers
 {
   [Route("api/[controller]")]
-  public class ActivitySignUpController : Controller
+  public class SubscriptionsController : Controller
   {
     private readonly SubscriptionContext _db;
 
-    public ActivitySignUpController(SubscriptionContext db)
+    public SubscriptionsController(SubscriptionContext db)
     {
       _db = db;
     }
 
-    [HttpPost("subscriptions")]
-    public ActionResult CreateSubscription([FromBody]SubscriptionModel subscription)
+    [HttpPost]
+    public async Task<ActionResult<SubscriptionModel>> PostSubscription([FromBody]SubscriptionModel subscription)
     {
       // some super light validation
       if (string.IsNullOrEmpty(subscription?.FirstName))
@@ -39,28 +41,28 @@ namespace activity_sign_up_app.Controllers
         Comments = subscription.Comments,
       });
 
-      _db.SaveChanges();
+      await _db.SaveChangesAsync();
 
       return CreatedAtAction(nameof(GetSubscription),
         new { id = newSubscription.Entity.SubscriptionID },
         MapToModel(newSubscription.Entity));
     }
 
-    [HttpGet("subscriptions/{id:int}")]
-    public ActionResult GetSubscription(int id)
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<SubscriptionModel>> GetSubscription(int id)
     {
-      var item = _db.Subscription.FirstOrDefault(x => x.SubscriptionID == id);
+      var item = await _db.Subscription.FindAsync(id);
+      if (item == null) {
+        return NotFound();
+      }
       return Ok(MapToModel(item));
     }
 
-    [HttpGet("subscriptions")]
-    public ActionResult GetSubscriptions()
+    [HttpGet()]
+    public async Task<ActionResult<IEnumerable<SubscriptionModel>>> GetSubscriptions()
     {
-      var items = _db.Subscription
-        .Select(MapToModel)
-        .ToList();
-
-      return Ok(items);
+      var items = await _db.Subscription.ToListAsync();
+      return Ok(items.Select(MapToModel));
     }
 
     [Serializable]
