@@ -62,7 +62,7 @@ VALUES
 GO
 ```
 
-Clone the repository: `git clone https://github.com/null-reference/activity-sign-up-app-auth.git`
+Clone the repository: `git clone https://github.com/null-reference/activity-sign-up-app.git`
 
 Open the created directory with VSCode.
 
