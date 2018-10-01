@@ -1,12 +1,4 @@
-﻿label {
-    width: 100px;
-}
-
-input, textarea {
-    width: 50%;
-}
-
-.label-align-top {
+﻿.label-align-top {
     vertical-align: top;
     margin-top: 2px;
 }

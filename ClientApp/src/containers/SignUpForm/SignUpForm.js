@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Alert } from 'react-bootstrap';
 import { Redirect } from 'react-router';
-import { validateEmailAddress } from '../../lib/utils';
+import { postSubscription } from '../../lib/api-client';
 import './SignUpForm.css';
 
 const initialFormData = {
-  firstName: "",
-  lastName: "",
-  email: "",
   activity: "",
-  comments: ""
+  comments: "",
 };
 
 export class SignUpForm extends Component {
@@ -59,19 +56,6 @@ export class SignUpForm extends Component {
 
     const validate = () => {
       const errors = [];
-      if (!dataToSave.firstName) {
-        errors.push("Missing first name.")
-      }
-      if (!dataToSave.lastName) {
-        errors.push("Missing last name.")
-      }
-      
-      if (!dataToSave.email) {
-        errors.push("Missing email.")
-      } else if (!validateEmailAddress(dataToSave.email)) {
-        errors.push("Invalid email.")
-      }
-
       if (!dataToSave.activity) {
         errors.push("Missing activity.")
       }
@@ -88,14 +72,7 @@ export class SignUpForm extends Component {
     }
     //////////////////////////////////////////////////
 
-    fetch("/api/subscriptions", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(dataToSave),
-    }).then(res => {
+    postSubscription(dataToSave).then(res => {
       if (res.ok) {
         this.setState({
           saving: false,
@@ -107,11 +84,9 @@ export class SignUpForm extends Component {
         });
       } else {
         // make sure we gracefully handle errors from the server
-        res.json().then(parsed => {
-          this.setState({
-            saving: false,
-            errorMessage: `Error during sign-up. ${parsed}`, 
-          });
+        this.setState({
+          saving: false,
+          errorMessage: `Error during sign-up. ${res.result}`, 
         });
       }
     });
@@ -138,9 +113,6 @@ export class SignUpForm extends Component {
     } = this.state;
 
     const {
-      firstName,
-      lastName,
-      email,
       activity,
       comments
     } = this.state.formData;
@@ -177,27 +149,6 @@ export class SignUpForm extends Component {
           </Alert>
         )}
 
-        <TextInputField
-          name="firstName"
-          value={firstName}
-          label="First Name"
-          onChange={this.formValueChanged}
-          saving={saving}
-        />
-        <TextInputField
-          name="lastName"
-          value={lastName}
-          label="Last Name"
-          onChange={this.formValueChanged}
-          saving={saving}
-        />
-        <TextInputField
-          name="email"
-          value={email}
-          label="Email"
-          onChange={this.formValueChanged}
-          saving={saving}
-        />
         <TextInputField
           name="activity"
           value={activity}

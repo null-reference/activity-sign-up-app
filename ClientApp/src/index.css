@@ -8,3 +8,11 @@
 h1 {
     margin-bottom: 20px;
 }
+
+label {
+    width: 100px;
+}
+
+input, textarea {
+    width: 50%;
+}

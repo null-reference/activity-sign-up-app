@@ -7,9 +7,7 @@ namespace activity_sign_up_app.Models
   {
     [Key]
     public int? SubscriptionID { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
+    public int UserID { get; set; }
     public string Activity { get; set; }
     public string Comments { get; set; }
   }

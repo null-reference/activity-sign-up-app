@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
+import { getSubscriptions } from '../../lib/api-client';
 
 /**
  * Simple component that displays activity subscriptions, nothing more
@@ -15,16 +16,15 @@ export class Subscriptions extends Component {
     };
   }
 
-  componentWillMount() {
-    fetch("/api/subscriptions").then(res => {
-      res.json().then(subs => {
+  componentDidMount() {
+    getSubscriptions()
+      .then(subs => {
         this.setState({ 
           loading: false,
           // pre-sort by id
           subscriptions: subs.sort((a, b) => a.subscriptionID - b.subscriptionID),
         });
       });
-    });
   }
 
   render() {
