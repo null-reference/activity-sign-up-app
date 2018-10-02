@@ -44,10 +44,10 @@ GO
 -- currently do not have a "create user profile" component; let's assume some users are setup in advance
 INSERT INTO [User] (Username, [Password], FirstName, LastName, Email)
 VALUES
-	('steve', 'pw123', 'Steve', 'Dignan', 'guyfrompei@gmail.com'),
-	('karen', 'pw123', 'Karen', 'Jones', 'kjones@gmail.com'),
-	('rhea', 'pw123', 'Rhea', 'Newman', 'rnewman@gmail.com'),
-	('simon', 'pw123', 'Simon', 'Smith', 'ssmith@gmail.com')
+	('steve', 'pw123', 'Steve', 'Waites', 'sd@test.com'),
+	('karen', 'pw123', 'Karen', 'Jones', 'kj@test.com'),
+	('rhea', 'pw123', 'Rhea', 'Woods', 'rn@test.com'),
+	('simon', 'pw123', 'Simon', 'Smith', 'ss@test.com')
 GO
 
 -- throw in some mock subscription data to start with
